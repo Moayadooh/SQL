@@ -1,0 +1,18 @@
+
+study more about candidate key:
+candidate key is minmal subset of super key that mean it can be
+1 key onle
+or
+2 keys only
+or
+3 keys only
+
+Hierarchical:
+	super key
+  candidate key
+   primary key
+   
+--> super key is a set of unique keys
+--> candidate key can be choosen from that set of keys and can be more than one key
+--> primary key is a candidate key choosen by the administrator to be a primary key
+

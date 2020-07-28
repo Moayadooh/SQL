@@ -1,0 +1,31 @@
+
+
+HR sample schema table descriptions:
+https://docs.oracle.com/en/database/oracle/oracle-database/12.2/comsc/HR-sample-schema-table-descriptions.html#GUID-D3AB4410-FEA7-49A4-A0E4-9E75B2ED40DA
+
+Tables query HR schema: "2 to 27"
+https://livesql.oracle.com/apex/livesql/file/content_GV8MU6SITA2V3VYI179FAJUCY.html
+
+
+
+Unlock HR user account:
+http://www.rebellionrider.com/how-to-unlock-hr-user-in-oracle-database-19c/
+
+ALTER USER hr IDENTIFIED BY hr ACCOUNT UNLOCK;
+
+ALTER USER hr IDENTIFIED BY hr ACCOUNT LOCK;
+
+
+
+sqlplus / as sysdba
+ALTER SESSION SET container = ORCLPDB;
+COLUMN name FORMAT a20;
+SELECT name, open_mode FROM v$pdbs;
+ALTER PLUGGABLE DATABASE open;
+ALTER USER hr IDENTIFIED BY hr ACCOUNT UNLOCK;
+
+
+
+SQL Plus
+hr@orclpdb
+hr

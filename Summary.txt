@@ -1,0 +1,75 @@
+Chapter 1
+Retrieving Data Using the SQL SELECT Statement
+-table structure
+-unique data in column
+-concatination
+-column name
+
+
+Chapter 2
+Restricting and Sorting Data
+-operators (>, <, +, -, *, /, =)
+-and, between, not, in, null
+-order by (acending, decending)
+-like (%, ___)
+-'&name'
+
+
+Chapter 3
+Using Single-Row Functions to Customize Output
+-lower, upper, initcap, round, length, count, sum, avg, max, min
+-sysdate from dual
+-months_between, trunc
+-lpad (right-padded), rpad (left-padded)
+
+
+Chapter 4
+Using Conversion Functions and Conditional Expressions
+-date fromat function
+-salary format function
+-concat, substr
+-nvl(Replace null with value), nvl2(if not null replace with first else replace with second)
+-nullif(if both are equal return null else return first value. "sort based on the second value")
+-coalesce(if both are null return the value else if first not null then return first else return second)
+-case expression (case, when, then, else, end)
+
+
+Chapter 5
+Reporting Aggregated Data Using the Group Functions
+-group by expression
+
+
+Chapter 6
+Displaying Data from Multiple Tables
+-natural join
+-using
+-left outer join, right outer join, full outer join
+-alies, on
+-self join
+
+
+Chapter 7
+Using Subqueries to Solve Queries
+- =, >, in
+- <>  Exclude
+- UNDEFINE
+
+
+Chapter 8 and 9
+-DDL and DML
+
+
+Chapter 10
+Creating Other Schema Objects
+-View
+-Sequences
+-Index
+-Synonym
+
+
+Chapter 11
+-Controlling User Access
+
+
+Chapter 12
+-Managing Schema Objects

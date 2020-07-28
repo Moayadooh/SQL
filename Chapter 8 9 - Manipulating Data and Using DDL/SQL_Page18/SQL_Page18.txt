@@ -1,0 +1,14 @@
+
+
+-ER: Entity Relationship
+-Entity --> Table
+-Attribute --> Column
+
+first write about entity
+second relation between them
+
+Romm num is foreign key in patient table
+employee id is foreign key in patient table
+nurse can add to it supervisor id
+
+

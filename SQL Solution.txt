@@ -1,0 +1,14 @@
+--1
+select CustomerID from Customer where CreatedDate >= ‘1-1-2015’;
+
+--2
+select CustomerID, CreatedDate from Address where CustomerID = (select CustomerID from Address where AddressName = ’Oulu’ and IsActive = true);
+
+--3
+select CustomerID, CreatedDate from Address where CustomerID = (select CustomerID from Address where AddressName = ’Oulu’ or AddressName = ‘Helsinki’);
+
+--4
+select CustomerID, CreatedDate from Address where CustomerID = (select CustomerID from Address where AddressName = ’Oulu’ and AddressName = ‘Helsinki’);
+
+--5
+select c.CustomerID, nvl(a.AddressName,'') from Customer c join Address a where c.CustomerID = a.CustomerID and a.IsActive = true;
