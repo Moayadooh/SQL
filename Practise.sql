@@ -16,3 +16,7 @@ select e.MANAGER_ID, e.DEPARTMENT_ID, e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, 
 
 --Self Join
 select e.employee_id, e.last_name, e.manager_id, m.last_name from employees e join employees m on e.manager_id = m.employee_id;
+
+--Exclude
+select employee_id, last_name from employees where employee_id in (select manager_id from employees) and employee_id <> 100;
+

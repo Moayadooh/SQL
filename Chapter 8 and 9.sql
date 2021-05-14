@@ -10,7 +10,7 @@ price number(8,2),
 
 constraint customer_customer_id_pk primary key(customer_id), 
 constraint customer_email_uk unique(email), 
-constraint customer_email_min check(price >= 0)
+constraint customer_price_min check(price >= 0)
 );
 
 drop table customer;
@@ -34,18 +34,20 @@ drop table address;
 select * from address;
 
 
-savepoint customer;
-rollback to customer;
-rollback;
+savepoint frstPoint;
+rollback to frstPoint; --all save points after this savepoint will be erased
+rollback; --rollback to last commit (all savepoints after commit will be erased)
 commit;
 
-SET VERIFY OFF --Don't display query with variable and with value after the execution
+SET VERIFY OFF
 SET VERIFY ON
+--SET VERIFY
+--https://www.oreilly.com/library/view/oracle-sqlplus-the/0596007469/re106.html
 
 SET ECHO OFF
 SET ECHO ON
 
-@c:\SQL_Script\sql
+@/home/moayad/Documents/SQL/SQL_Script/sql
 
 /*
 -VARCHAR store up to 2000 bytes of characters 
