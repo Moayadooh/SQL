@@ -61,10 +61,12 @@ Chapter 8 and 9
 
 Chapter 10
 Creating Other Schema Objects
--View
+-Views
 -Sequences
--Index
--Synonym
+-Triggers
+-Stored Procedures
+-Indexes (Pages 195 to 201)
+-Synonyms
 
 
 Chapter 11
