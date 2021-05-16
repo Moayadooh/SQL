@@ -8,6 +8,7 @@
 */
 SELECT * FROM employees;
 
+DESC employees;
 DESCRIBE employees;
 
 SELECT DISTINCT manager_id FROM employees;
