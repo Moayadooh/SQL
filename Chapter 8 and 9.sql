@@ -1,43 +1,44 @@
 --Chapter 8 and 9
 --DDL and DML
 
-create table customer (
-customer_id integer, 
-name varchar2(30), 
-email varchar2(30), 
-age integer, 
-price number(8,2), 
+CREATE TABLE customer (
+customer_id INTEGER, 
+name VARCHAR2(30), 
+email VARCHAR2(30), 
+age INTEGER, 
+price NUMBER(8,2), 
 
-constraint customer_customer_id_pk primary key(customer_id), 
-constraint customer_email_uk unique(email), 
-constraint customer_price_min check(price >= 0)
+CONSTRAINT customer_customer_id_pk PRIMARY KEY(customer_id), 
+CONSTRAINT customer_email_uk UNIQUE(email), 
+CONSTRAINT customer_price_min CHECK(price >= 0)
 );
 
-drop table customer;
-select * from customer;
-insert into customer values(1,'Eyad','eyad@email',1,836.156);
-insert into customer values(2,'Mohanned','mohanned@email',21,10.141);
-update customer set price = 65.238 where customer_id = 1;
-delete from customer where customer_id = 1;
-truncate table customer;--delete the rows permenantly 'No Rollback'
+DROP TABLE customer;
+SELECT * FROM customer;
+INSERT INTO customer VALUES(1,'Eyad','eyad@email',1,836.156);
+INSERT INTO customer VALUES(2,'Mohanned','mohanned@email',21,10.141);
+UPDATE customer SET price = 65.238 WHERE customer_id = 1;
+
+DELETE FROM customer WHERE customer_id = 1;
+TRUNCATE TABLE customer;--delete the rows permenantly 'No Rollback'
 
 
-create table address (
-name varchar2(50) not null, 
-created_date date not null, 
-customer_id integer, 
+CREATE TABLE address (
+name VARCHAR2(50) NOT NULL, 
+created_date DATE NOT NULL, 
+customer_id INTEGER, 
 
-constraint address_customer_id_fk foreign key(customer_id) references customer(customer_id)
+CONSTRAINT address_customer_id_fk FOREIGN KEY(customer_id) REFERENCES customer(customer_id)
 );
 
-drop table address;
-select * from address;
+DROP TABLE address;
+SELECT * FROM address;
 
 
-savepoint frstPoint;
-rollback to frstPoint; --all save points after this savepoint will be erased
-rollback; --rollback to last commit (all savepoints after commit will be erased)
-commit;
+SAVEPOINT frstPoint;
+ROLLBACK TO frstPoint; --all save points after this savepoint will be erased
+ROLLBACK; --rollback to last commit (all savepoints after commit will be erased)
+COMMIT;
 
 SET VERIFY OFF
 SET VERIFY ON
@@ -57,8 +58,8 @@ SET ECHO ON
 -VARCHAR2 will not occupy any space.
  	 
 -Varchar(10) - If you enter value less than 10, it utilize total 10 spaces.
--Varchar2(10) - If you enter value less than 10 then remaining space is not utilize.
-http://interviewaskquestions.blogspot.com/2011/04/difference-between-varchar-and-varchar2.html
+-VARCHAR2(10) - If you enter value less than 10 then remaining space is not utilize.
+http://interviewaskquestions.blogspot.com/2011/04/difference-between-varchar-and-VARCHAR2.html
 
 
 -INTEGER not accept decimal places

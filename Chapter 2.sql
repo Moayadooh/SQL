@@ -7,14 +7,14 @@
 -like (%, ___)
 -'&name'
 */
-select * from employees;
+SELECT * FROM employees;
 
-select * from employees where salary < (1000*5);
+SELECT * FROM employees WHERE salary < (1000*5);
 
-select employee_id, last_name, salary from employees where salary between 10000 and 20000;
+SELECT employee_id, last_name, salary FROM employees WHERE salary BETWEEN 10000 AND 20000;
 
-select * from employees where commission_pct is not null order by last_name desc;
+SELECT * FROM employees WHERE commission_pct IS NOT NULL ORDER BY last_name DESC;
 
-select * from employees where last_name like 'K%' or first_name like '___a';
+SELECT * FROM employees WHERE last_name LIKE 'K%' OR first_name LIKE '___a';
 
-select * from employees where salary in ('&salary1','&salary2');
+SELECT * FROM employees WHERE salary IN ('&salary1','&salary2');

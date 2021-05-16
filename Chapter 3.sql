@@ -6,16 +6,16 @@
 -months_between, trunc
 -lpad (right-padded), rpad (left-padded)
 */
-select * from employees;
+SELECT * FROM employees;
 
-select round(avg(salary),2) from employees;
+SELECT round(avg(salary),2) FROM employees;
 
-select sysdate from dual;
-select sysdate-hire_date from employees where employee_id = 100; --Return number of days
+SELECT SYSDATE FROM dual;
+SELECT SYSDATE-hire_date FROM employees WHERE employee_id = 100; --Return number of days
 
-select last_name, round(months_between(sysdate, hire_date)) from employees;
-select last_name, trunc((sysdate-hire_date)/7) from employees;
+SELECT last_name, round(months_between(SYSDATE, hire_date)) FROM employees;
+SELECT last_name, trunc((SYSDATE-hire_date)/7) FROM employees;
 
-select lpad(last_name,3) from employees;
-select rpad(last_name,15, '*') from employees;
-select lpad(' ', salary/1000+1, '$') from employees;-- +1 is added to include one more symbol that hidden due to the space in the beginning
+SELECT lpad(last_name,3) FROM employees;
+SELECT rpad(last_name,15, '*') FROM employees;
+SELECT lpad(' ', salary/1000+1, '$') FROM employees;-- +1 is added to include one more symbol that hidden due to the space in the beginning

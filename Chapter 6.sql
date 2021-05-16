@@ -7,17 +7,17 @@
 -alies, on
 -self join
 */
-select * from employees;
-select * from departments;
+SELECT * FROM employees;
+SELECT * FROM departments;
 
-select * from employees natural join departments;
-select * from employees join departments using (manager_id);
+SELECT * FROM employees NATURAL JOIN departments;
+SELECT * FROM employees JOIN departments using (manager_id);
 
-select * from employees left outer join departments using (manager_id);
-select * from employees right outer join departments using (manager_id);
-select * from employees full outer join departments using (manager_id);
+SELECT * FROM employees LEFT OUTER JOIN departments using (manager_id);
+SELECT * FROM employees RIGHT OUTER JOIN departments using (manager_id);
+SELECT * FROM employees FULL OUTER JOIN departments using (manager_id);
 
-select e.employee_id, e.last_name, e.department_id, d.department_name from employees e, departments d where e.department_id = d.department_id;
-select e.employee_id, e.last_name, e.department_id, d.department_name from employees e join departments d on e.department_id = d.department_id;
+SELECT e.employee_id, e.last_name, e.department_id, d.department_name FROM employees e, departments d WHERE e.department_id = d.department_id;
+SELECT e.employee_id, e.last_name, e.department_id, d.department_name FROM employees e JOIN departments d ON e.department_id = d.department_id;
 
-select e.employee_id, e.last_name, e.manager_id, m.last_name from employees e, employees m where e.manager_id = m.employee_id;
+SELECT e.employee_id, e.last_name, e.manager_id, m.last_name FROM employees e, employees m WHERE e.manager_id = m.employee_id;

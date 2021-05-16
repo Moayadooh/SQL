@@ -10,16 +10,16 @@
 */
 
 --Views
-create view emp_vw as select id, first_name, last_name, mobileno, salary from employees where id in (1,2,3);
-create or replace view emp_vw as select id, first_name, last_name, mobileno, salary from employees where id in (1,3,4);
-select * from emp_vw;
+CREATE view emp_vw AS SELECT id, first_name, last_name, mobileno, salary FROM employees WHERE id IN (1,2,3);
+CREATE OR REPLACE view emp_vw AS SELECT id, first_name, last_name, mobileno, salary FROM employees WHERE id IN (1,3,4);
+SELECT * FROM emp_vw;
 
-create or replace view emp_vw as select id, first_name, last_name, mobileno, salary from employees where id in (1,3,4) with read only;--prevent DML
-create or replace view emp_vw as select id, first_name, last_name, mobileno, salary from employees where id in (1,3,4) with check option constraint emp_vw;--prevent violation during DML
+CREATE OR REPLACE view emp_vw AS SELECT id, first_name, last_name, mobileno, salary FROM employees WHERE id IN (1,3,4) WITH READ only;--prevent DML
+CREATE OR REPLACE view emp_vw AS SELECT id, first_name, last_name, mobileno, salary FROM employees WHERE id IN (1,3,4) WITH CHECK OPTION CONSTRAINT emp_vw;--prevent violation during DML
 
-desc emp_vw;
-drop view emp_vw;
-select * from emp_vw;
+DESC emp_vw;
+DROP view emp_vw;
+SELECT * FROM emp_vw;
 
 
 

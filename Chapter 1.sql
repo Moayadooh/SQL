@@ -6,10 +6,10 @@
 -concatination
 -column name
 */
-select * from employees;
+SELECT * FROM employees;
 
-describe employees;
+DESCRIBE employees;
 
-select distinct manager_id from employees;
+SELECT DISTINCT manager_id FROM employees;
 
-select employee_id || ' ' || first_name || ' ' || last_name "Employee Details" from employees;
+SELECT employee_id || ' ' || first_name || ' ' || last_name "Employee Details" FROM employees;

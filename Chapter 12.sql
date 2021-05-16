@@ -10,8 +10,14 @@ age integer,
 price number(8,2), 
 
 constraint customer_email_uk unique(email), 
-constraint customer_email_min check(price >= 0)
+constraint customer_price_min check(price >= 0)
 );
+
+ALTER TABLE customer READ ONLY;
+ALTER TABLE customer READ WRITE;
+SELECT * FROM customer;
+INSERT INTO customer SELECT employee_id, last_name, email FROM employees;
+DESC employees;
 
 describe customer;
 alter table customer modify (price Number(8,3));

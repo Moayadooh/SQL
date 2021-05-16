@@ -5,11 +5,11 @@
 - <>  Exclude
 - UNDEFINE
 */
-select * from employees where manager_id = (select manager_id from employees where employee_id = 101);
+SELECT * FROM employees WHERE manager_id = (SELECT manager_id FROM employees WHERE employee_id = 101);
 
-select * from employees where salary > (select avg(salary) from employees);
+SELECT * FROM employees WHERE salary > (SELECT avg(salary) FROM employees);
 
-select * from employees where department_id in (select department_id from departments where location_id = 1700);
+SELECT * FROM employees WHERE department_id IN (SELECT department_id FROM departments WHERE location_id = 1700);
 
 UNDEFINE id;
-select * from employees where manager_id = (select manager_id from employees where employee_id = '&&id') and employee_id <> '&id';
+SELECT * FROM employees WHERE manager_id = (SELECT manager_id FROM employees WHERE employee_id = '&&id') AND employee_id <> '&id';

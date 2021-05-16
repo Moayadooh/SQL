@@ -1,30 +1,49 @@
 --Chapter 11
 --Controlling User Access
 
-select * from customer;
-insert into customer select employee_id, last_name, email from employees;
-desc employees;
+SELECT * FROM hr.employees;
+SELECT * FROM hr.departments;
 
-alter table customer read only;
-delete from customer;
-truncate table customer;
-alter table customer read write;
+CREATE USER demo IDENTIFIED BY demo;
+ALTER USER demo IDENTIFIED BY employ;
 
-create user c##md identified by md;
-grant connect, resource to c##md;
---ALTER USER c##md DEFAULT TABLESPACE USERS;--changes default tablespace of the user
-ALTER USER c##md QUOTA 4M ON USERS;--assigns 4MB of space to the user
---unlimited 
+--Privileges
+--Session privilege allow user to connect to database
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE view TO demo;
 
-drop user c##md;
-drop user c##md CASCADE;--drop a user whose schema contains objects
 
-SELECT * FROM USER_SYS_PRIVS;
-SELECT * FROM DBA_ROLE_PRIVS;
-SELECT * FROM DBA_TAB_PRIVS;
+--Roles
+CREATE ROLE manager;
+DROP ROLE manager;
 
-GRANT select ON hr.employees TO c##md;
-GRANT SELECT ANY TABLE TO c##md;
-REVOKE select ON employees from c##md;
 
-select * from hr.employees;
+GRANT CREATE TABLE, CREATE view TO manager;
+REVOKE CREATE TABLE, CREATE view FROM manager;
+
+GRANT manager TO demo, testdb;
+REVOKE manager FROM demo, testdb;
+
+--Object Privileges
+GRANT SELECT ON hr.employees TO testdb;
+REVOKE SELECT ON hr.employees FROM testdb;
+
+--Grant privileges to update specific columns to users and roles
+GRANT UPDATE (department_name, location_id) ON departments TO demo, manager;
+REVOKE UPDATE ON departments FROM demo, manager;
+
+--Give a user authority to pass along privileges
+GRANT SELECT, INSERT ON departments TO demo WITH GRANT OPTION;
+
+--Allow all users on the system to query data from departments table
+GRANT SELECT ON hr.departments TO PUBLIC;
+
+
+--Confirming Granted Privileges
+SELECT * FROM ROLE_SYS_PRIVS; --System privileges granted to roles
+SELECT * FROM ROLE_TAB_PRIVS; --Table privileges granted to roles
+SELECT * FROM USER_ROLE_PRIVS; --Roles accessible by the user
+SELECT * FROM USER_SYS_PRIVS; --System privileges granted to the user
+SELECT * FROM USER_TAB_PRIVS_MADE; --Object privileges granted on the user’s objects
+SELECT * FROM USER_TAB_PRIVS_RECD; --Object privileges granted to the user
+SELECT * FROM USER_COL_PRIVS_MADE; --Object privileges granted on the columns of the user’s objects
+SELECT * FROM USER_COL_PRIVS_RECD; --Object privileges granted to the user on specific columns
