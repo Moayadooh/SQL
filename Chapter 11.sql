@@ -9,7 +9,23 @@ ALTER USER demo IDENTIFIED BY employ;
 
 --Privileges
 --Session privilege allow user to connect to database
-GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE view TO demo;
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW TO demo;
+
+GRANT CREATE TRIGGER TO demo;
+GRANT CREATE PROCEDURE TO demo;
+GRANT CREATE SYNONYM TO demo;
+GRANT CREATE PUBLIC SYNONYM TO demo;
+GRANT CREATE USER TO demo;
+GRANT DROP ANY INDEX TO demo;
+GRANT CONNECT, RESOURCE TO demo; --https://chartio.com/resources/tutorials/how-to-create-a-user-and-grant-permissions-in-oracle/
+
+ALTER USER demo DEFAULT TABLESPACE USERS;--changes default tablespace of the user
+ALTER USER demo QUOTA UNLIMITED ON system;
+ALTER USER demo QUOTA 4M ON USERS;--set 4MB of space to user
+DROP USER demo CASCADE;--drop a user whose schema contains objects
+
+SELECT username, account_status FROM dba_users; --check database status
+SELECT username, account_status FROM dba_users WHERE username = 'DEMO';
 
 
 --Roles
