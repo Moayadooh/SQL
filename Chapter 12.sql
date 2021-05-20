@@ -1,5 +1,19 @@
 --Chapter 12
 --Managing Schema Objects
+/*
+-Insert data from other table
+-ALTER TABLE (ADD CONSTRAINT, MODIFY, DROP CONSTRAINT, 
+			  READ ONLY, READ WRITE, ON DELETE CASCADE, 	
+			  DROP PRIMARY KEY CASCADE, DISABLE CONSTRAINT, 
+			  ENABLE CONSTRAINT, RENAME COLUMN, RENAME CONSTRAINT)
+-DROP TABLE (PURGE, CASCADE CONSTRAINTS)
+-DROP COLUMN (CASCADE CONSTRAINTS)
+-Deferring Constraints (DEFERRED, IMMEDIATE)
+-CREATE INDEX with the CREATE TABLE Statement
+-FLASHBACK TABLE Statement
+-Creating a Directory for the External Table
+-Creating an External (ORACLE_LOADER, ORACLE_DATAPUMP)
+*/
 
 DROP TABLE customers;
 CREATE TABLE customers (
@@ -18,7 +32,6 @@ ALTER TABLE customers DROP CONSTRAINT customers_email_uk;
 
 INSERT INTO customers SELECT employee_id, last_name, email, NULL, NULL FROM hr.employees; --insert data from other table
 
-SELECT * FROM hr.employees;
 SELECT * FROM customers;
 SELECT * FROM address;
 

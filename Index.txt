@@ -56,7 +56,8 @@ Using Subqueries to Solve Queries
 
 
 Chapter 8 and 9
--DDL and DML
+DDL and DML
+-Data Types & Datetime Data Types (Pages 132 to 134)
 
 
 Chapter 10

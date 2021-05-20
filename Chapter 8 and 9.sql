@@ -18,6 +18,7 @@ http://interviewaskquestions.blogspot.com/2011/04/difference-between-varchar-and
 -Decimal accept any number of decimal placess
 */
 
+--Creating Tables
 CREATE TABLE customers (
 customer_id INTEGER, 
 name VARCHAR2(30), 
@@ -40,10 +41,13 @@ UPDATE customers SET price = 65.238 WHERE customer_id = 1;
 DELETE FROM customers WHERE customer_id = 1;
 TRUNCATE TABLE customers;--delete the rows permenantly 'No Rollback'
 
+--Referencing Another User’s Tables
+SELECT * FROM hr.employees;
 
+--DEFAULT Option 
 CREATE TABLE address (
 name VARCHAR2(50) NOT NULL, 
-created_date DATE NOT NULL, 
+created_date DATE DEFAULT sysdate NOT NULL,
 customer_id INTEGER, 
 
 CONSTRAINT address_customer_id_fk FOREIGN KEY(customer_id) REFERENCES customers(customer_id)

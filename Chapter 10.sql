@@ -83,10 +83,9 @@ DROP SYNONYM d_emp;
 
 --Public Synonym
 CREATE PUBLIC SYNONYM dd_emp FOR emp_vw; --Can be accessed by any  user
-DROP PUBLIC SYNONYM d_emp; --Can be dropped by administrator only
+DROP PUBLIC SYNONYM d_emp; --can be dropped by administrator only
 
---Set privilege for user to access the synonym
-GRANT SELECT ON d_emp TO hr;
+GRANT SELECT ON d_emp TO hr; --give privilege for user to access the synonym
 REVOKE SELECT ON d_emp FROM hr;
 
 SELECT * FROM testdb.d_emp; --Access private synonym after grant privilege

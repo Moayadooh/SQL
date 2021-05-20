@@ -1,5 +1,14 @@
 --Chapter 11
 --Controlling User Access
+/*
+-Creating User & Changing User Password
+-Granting System Privileges (DDL)
+-Creating and Granting Privileges to a Role
+-Granting Object Privileges (DML)
+-Revoking Object Privileges
+-Passing On Privileges
+-Confirming Granted Privileges
+*/
 
 SELECT * FROM hr.employees;
 SELECT * FROM hr.departments;
