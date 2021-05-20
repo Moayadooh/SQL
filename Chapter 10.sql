@@ -21,31 +21,22 @@ DESC emp_vw;
 DROP view emp_vw;
 SELECT * FROM emp_vw;
 
-
-
 --Sequences
 --NOCYCLE --> will not start from the begining after reaching the max value
 --NOCACHE --> Prevent values of the sequence to be preallocated https://docs.oracle.com/cd/B14117_01/server.101/b10759/statements_6014.htm
-
 DROP SEQUENCE emp_seq;
 CREATE SEQUENCE emp_seq INCREMENT BY 10 START WITH 100 MAXVALUE 10000 CACHE 20 NOCYCLE; --oracle server will prallocate 20 values in cache for faster access
 CREATE SEQUENCE emp_seq INCREMENT BY 10 START WITH 100 MAXVALUE 10000 NOCACHE NOCYCLE;
 
---Without Trigger
-INSERT INTO employees(id, first_name, last_name, mobileno, salary) VALUES (emp_seq.NEXTVAL, 'Laith', 'AL-Falahi', 12345678, 542.12);
+INSERT INTO employees(id, first_name, last_name, mobileno, salary) VALUES (emp_seq.NEXTVAL, 'Laith', 'AL-Falahi', 12345678, 542.12); --without trigger
 
---Move to next sequence value
-SELECT emp_seq.NEXTVAL FROM dual;
+SELECT emp_seq.NEXTVAL FROM dual; --move to next sequence value
 
---Current sequence value
-SELECT emp_seq.CURRVAL FROM dual;
+SELECT emp_seq.CURRVAL FROM dual; --current sequence value
 
 ALTER SEQUENCE emp_seq INCREMENT BY 50 MAXVALUE 1000000 NOCACHE NOCYCLE;
 
-
-
---Triggers
---Code that is automatically executed
+--Triggers (code automatically executed)
 CREATE OR REPLACE TRIGGER emp_trig 
 BEFORE INSERT ON EMPLOYEES 
 FOR EACH ROW
@@ -57,10 +48,7 @@ END;
 
 DROP TRIGGER emp_trig;
 
---With Trigger
-INSERT INTO employees(first_name, last_name, mobileno, salary) VALUES ('Laith', 'AL-Falahi', 12345678, 542.12);
-
-
+INSERT INTO employees(first_name, last_name, mobileno, salary) VALUES ('Laith', 'AL-Falahi', 12345678, 542.12); --with trigger
 
 --Stored Procedures
 CREATE OR REPLACE PROCEDURE sp_getEmpById 
@@ -88,8 +76,6 @@ CREATE OR REPLACE PROCEDURE sp_deleteEmp
 BEGIN
    DELETE FROM EMPLOYEES WHERE ID = EMP_ID;
 END;
-
-
 
 --Synonyms
 CREATE SYNONYM d_emp FOR emp_vw;

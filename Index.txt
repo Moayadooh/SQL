@@ -63,20 +63,30 @@ Chapter 10
 Creating Other Schema Objects
 -Views
 -Sequences
--Triggers
+-Triggers (code automatically executed)
 -Stored Procedures
--Indexes (Pages 195 to 201)
--Synonyms
+-Indexes (read pages 195 to 201)
+-Synonyms & Public Synonym
 
 
 Chapter 11
--Controlling User Access
+Controlling User Access
+-Creating User & Changing User Password
+-Granting System Privileges (DDL)
+-Creating and Granting Privileges to a Role
+-Granting Object Privileges (DML)
+-Revoking Object Privileges
+-Passing On Privileges
+-Confirming Granted Privileges
 
 
 Chapter 12
 Managing Schema Objects
 -Insert data from other table
--ALTER TABLE (ADD CONSTRAINT, MODIFY, DROP CONSTRAINT, READ ONLY, READ WRITE, ON DELETE CASCADE, DROP PRIMARY KEY CASCADE, DISABLE CONSTRAINT, ENABLE CONSTRAINT, RENAME COLUMN, RENAME CONSTRAINT)
+-ALTER TABLE (ADD CONSTRAINT, MODIFY, DROP CONSTRAINT, 
+			  READ ONLY, READ WRITE, ON DELETE CASCADE, 	
+			  DROP PRIMARY KEY CASCADE, DISABLE CONSTRAINT, 
+			  ENABLE CONSTRAINT, RENAME COLUMN, RENAME CONSTRAINT)
 -DROP TABLE (PURGE, CASCADE CONSTRAINTS)
 -DROP COLUMN (CASCADE CONSTRAINTS)
 -Deferring Constraints (DEFERRED, IMMEDIATE)

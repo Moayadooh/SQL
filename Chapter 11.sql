@@ -4,13 +4,12 @@
 SELECT * FROM hr.employees;
 SELECT * FROM hr.departments;
 
+--Creating User
 CREATE USER demo IDENTIFIED BY demo;
-ALTER USER demo IDENTIFIED BY employ;
+ALTER USER demo IDENTIFIED BY employ; --changing user password
 
---Privileges
---Session privilege allow user to connect to database
-GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW TO demo;
-
+--Granting System Privileges (DDL)
+GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW TO demo; --session privilege allow user to connect to database
 GRANT CREATE TRIGGER TO demo;
 GRANT CREATE PROCEDURE TO demo;
 GRANT CREATE SYNONYM TO demo;
@@ -21,19 +20,17 @@ GRANT CREATE ANY DIRECTORY TO demo;
 GRANT SELECT, INSERT, UPDATE, DELETE ON tableName TO demo;
 GRANT CONNECT, RESOURCE TO demo; --https://chartio.com/resources/tutorials/how-to-create-a-user-and-grant-permissions-in-oracle/
 
-ALTER USER demo DEFAULT TABLESPACE USERS;--changes default tablespace of the user
+ALTER USER demo DEFAULT TABLESPACE USERS; --changes default tablespace of the user
 ALTER USER demo QUOTA UNLIMITED ON system;
-ALTER USER demo QUOTA 4M ON USERS;--set 4MB of space to user
-DROP USER demo CASCADE;--drop a user whose schema contains objects
+ALTER USER demo QUOTA 4M ON USERS; --set 4MB of space to user
+DROP USER demo CASCADE; --drop a user whose schema contains objects
 
 SELECT username, account_status FROM dba_users; --check database status
 SELECT username, account_status FROM dba_users WHERE username = 'DEMO';
 
-
---Roles
+--Creating and Granting Privileges to a Role
 CREATE ROLE manager;
 DROP ROLE manager;
-
 
 GRANT CREATE TABLE, CREATE view TO manager;
 REVOKE CREATE TABLE, CREATE view FROM manager;
@@ -41,20 +38,17 @@ REVOKE CREATE TABLE, CREATE view FROM manager;
 GRANT manager TO demo, testdb;
 REVOKE manager FROM demo, testdb;
 
---Object Privileges
+--Granting Object Privileges (DML) | Revoking Object Privileges
 GRANT SELECT ON hr.employees TO testdb;
 REVOKE SELECT ON hr.employees FROM testdb;
 
---Grant privileges to update specific columns to users and roles
-GRANT UPDATE (department_name, location_id) ON departments TO demo, manager;
+GRANT UPDATE (department_name, location_id) ON departments TO demo, manager; --grant privileges to update specific columns to users and roles
 REVOKE UPDATE ON departments FROM demo, manager;
 
---Give a user authority to pass along privileges
-GRANT SELECT, INSERT ON departments TO demo WITH GRANT OPTION;
+GRANT SELECT, INSERT ON departments TO demo WITH GRANT OPTION; --give a user authority to pass along privileges
 
---Allow all users on the system to query data from departments table
-GRANT SELECT ON hr.departments TO PUBLIC;
-
+--Passing On Privileges
+GRANT SELECT ON hr.departments TO PUBLIC; --allow all users on the system to query data from departments table
 
 --Confirming Granted Privileges
 SELECT * FROM ROLE_SYS_PRIVS; --System privileges granted to roles
