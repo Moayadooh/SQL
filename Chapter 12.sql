@@ -1,6 +1,7 @@
 --Chapter 12
 --Managing Schema Objects
 
+DROP TABLE customers;
 CREATE TABLE customers (
 customer_id INTEGER, 
 name VARCHAR2(30), 
@@ -11,9 +12,9 @@ price NUMBER(8,2),
 CONSTRAINT customers_email_uk UNIQUE(email), 
 CONSTRAINT customers_price_min CHECK(price > 0)
 );
-ALTER TABLE customers ADD CONSTRAINT customers_customer_id_pk primary key(customer_id); --alter table customer modify customer_id primary key;
-ALTER TABLE customers DROP CONSTRAINT customers_customer_id_pk;
+ALTER TABLE customers ADD CONSTRAINT customers_customer_id_pk primary key(customer_id);
 ALTER TABLE customers MODIFY price CHECK(price >= 0);
+ALTER TABLE customers DROP CONSTRAINT customers_email_uk;
 
 INSERT INTO customers SELECT employee_id, last_name, email, NULL, NULL FROM hr.employees; --insert data from other table
 
@@ -21,27 +22,28 @@ SELECT * FROM hr.employees;
 SELECT * FROM customers;
 SELECT * FROM address;
 
+DROP TABLE customers PURGE; --delete permanently(will not go to recycle bin)
+DROP TABLE customers CASCADE CONSTRAINTS; --delete table if there are other tables refer to this table PK
+ALTER TABLE customers DROP COLUMN customer_id CASCADE CONSTRAINTS; --delete column that have referential integrity
+
 --Read & Write actions
 ALTER TABLE customers READ ONLY;
 ALTER TABLE customers READ WRITE;
 
 --Manipulate table column
-ALTER TABLE customers MODIFY (price NUMBER(8,3));
 ALTER TABLE customers DROP COLUMN price;
-ALTER TABLE customers ADD (price NUMBER(4,1));
+ALTER TABLE customers ADD (price NUMBER(4,1) DEFAULT 0.0);
+ALTER TABLE customers MODIFY (price NUMBER(8,3));
 
---marks one or more columns as unused so that they can be dropped when the demand on system resources is lower
+INSERT INTO customers (customer_id,name,email) VALUES(2,'Eyad','eyad@email');
+
+--Marks one or more columns as unused so that they can be dropped when the demand on system resources is lower
 ALTER TABLE customers SET UNUSED COLUMN email;
 ALTER TABLE customers DROP UNUSED COLUMNS;
 SELECT * FROM USER_UNUSED_COL_TABS;
 
-DROP TABLE customers;
-DROP TABLE customers PURGE;
-DROP TABLE customers CASCADE CONSTRAINTS; --Delete table if there are other tables refer to this table PK
-ALTER TABLE customers DROP COLUMN customer_id CASCADE CONSTRAINTS;
 
-
-
+DROP TABLE address;
 CREATE TABLE address (
 name VARCHAR2(50) NOT NULL, 
 created_date DATE NOT NULL, 
@@ -49,13 +51,10 @@ customer_id INTEGER,
 
 CONSTRAINT address_customer_id_fk FOREIGN KEY(customer_id) REFERENCES customers(customer_id)
 );
-ALTER TABLE address ADD CONSTRAINT address_customer_id_fk FOREIGN KEY(customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE; --Delete child rows when a parent key is deleted
-ALTER TABLE customers DROP PRIMARY KEY CASCADE; --Remove ON DELETE CASCADE in address table FK
-ALTER TABLE address DROP CONSTRAINT address_customer_id_fk;
+ALTER TABLE address ADD CONSTRAINT address_customer_id_fk FOREIGN KEY(customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE; --delete child rows when a parent key is deleted
+ALTER TABLE customers DROP PRIMARY KEY CASCADE; --remove ON DELETE CASCADE in address table FK
 ALTER TABLE address DISABLE CONSTRAINT address_customer_id_fk;
 ALTER TABLE address ENABLE CONSTRAINT address_customer_id_fk;
-
-DROP TABLE address;
 
 INSERT INTO customers VALUES(1,'Eyad','eyad@email',1,836.156);
 INSERT INTO address VALUES('5664545454','15-JUNE-2020',1);
@@ -65,8 +64,7 @@ SELECT * FROM address;
 
 DELETE FROM customers WHERE customer_id = 1;
 
-
-
+--Deferring Constraints
 ALTER TABLE customers ADD CONSTRAINT customers_customer_id_pk primary key(customer_id) DEFERRABLE INITIALLY DEFERRED; --validate constraints after commit transaction (rollback if constraint violated)
 SET CONSTRAINTS customers_customer_id_pk IMMEDIATE; --validate constraints after end of statement 
 ALTER SESSION SET CONSTRAINTS = IMMEDIATE; --changing all constraints for a session
@@ -75,11 +73,11 @@ INSERT INTO customers VALUES(1,'Eyad','eyad@email',1,836.156);
 COMMIT;
 
 
-
+--Renaming Table Columns and Constraints
 ALTER TABLE address RENAME COLUMN name TO address_name;
 ALTER TABLE address RENAME CONSTRAINT new_address_customer_id_fk TO address_customer_id_fk;
 
---Indexes
+--CREATE INDEX with the CREATE TABLE Statement
 CREATE TABLE EMP_UNNAMED_INDEX
 (employee_id NUMBER(6) PRIMARY KEY,
 first_name VARCHAR2(20),
@@ -117,38 +115,52 @@ SELECT * FROM NEW_EMP2 WHERE LOWER(last_name) = 'al-falahii';
 CREATE INDEX lower_emp_last_name_idx ON NEW_EMP2(LOWER(last_name));
 DROP INDEX lower_emp_last_name_idx;
 
---Performing Flashback Operations
+--FLASHBACK TABLE Statement
 SELECT * FROM NEW_EMP2;
 DROP TABLE NEW_EMP2;
 SELECT original_name, operation, droptime FROM recyclebin;
 FLASHBACK TABLE NEW_EMP2 TO BEFORE DROP;
 PURGE RECYCLEBIN;
 
---Creating and using external tables
+--Creating a Directory for the External Table
 GRANT CREATE ANY DIRECTORY TO testdb;
 CREATE OR REPLACE DIRECTORY emp_dir AS '/home/moayad/Documents/SQL/SQL_Script/emp_dir';
+DROP DIRECTORY emp_dir;
 
 GRANT READ ON DIRECTORY emp_dir TO hr;
 GRANT READ, WRITE ON DIRECTORY emp_dir TO hr;
 
-CREATE TABLE oldemp (
-fname char(25), 
-lname CHAR(25)) ORGANIZATION EXTERNAL
-(TYPE ORACLE_LOADER
+--Creating an External Table by Using ORACLE_LOADER
+DROP TABLE oldemp;
+CREATE TABLE oldemp 
+(fname char(25), lname CHAR(25))
+ORGANIZATION EXTERNAL
+(
+TYPE ORACLE_LOADER
 DEFAULT DIRECTORY emp_dir
 ACCESS PARAMETERS
-(RECORDS DELIMITED BY NEWLINE
-NOBADFILE
-NOLOGFILE
+(
+RECORDS DELIMITED BY NEWLINE
+NOBADFILE NOLOGFILE
 FIELDS TERMINATED BY ','
---(fname POSITION ( 1:20) CHAR,
---lname POSITION (22:41) CHAR)
+--(fname POSITION ( 1:20) CHAR, lname POSITION (22:41) CHAR) (remove this comment before execute the statement)
 )
-LOCATION ('emp.dat'))
-PARALLEL 5
-REJECT LIMIT 200;
+LOCATION ('emp.dat')
+)
+PARALLEL 5 REJECT LIMIT 200;
 
-DROP TABLE oldemp;
 SELECT * FROM oldemp;
 
-SELECT * FROM employees;
+--Creating an External Table by Using ORACLE_DATAPUMP
+DROP TABLE emp_ext;
+CREATE TABLE emp_ext
+(id, first_name, last_name)
+ORGANIZATION EXTERNAL
+(
+TYPE ORACLE_DATAPUMP
+DEFAULT DIRECTORY emp_dir --give privilege to other users to write on "emp_dir" (remove this comment before execute the statement)
+LOCATION ('emp1.exp','emp2.exp')
+)
+PARALLEL AS SELECT id, first_name, last_name FROM employees;
+
+SELECT * FROM emp_ext;

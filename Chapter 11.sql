@@ -18,6 +18,7 @@ GRANT CREATE PUBLIC SYNONYM TO demo;
 GRANT CREATE USER TO demo;
 GRANT DROP ANY INDEX TO demo;
 GRANT CREATE ANY DIRECTORY TO demo;
+GRANT SELECT, INSERT, UPDATE, DELETE ON tableName TO demo;
 GRANT CONNECT, RESOURCE TO demo; --https://chartio.com/resources/tutorials/how-to-create-a-user-and-grant-permissions-in-oracle/
 
 ALTER USER demo DEFAULT TABLESPACE USERS;--changes default tablespace of the user
