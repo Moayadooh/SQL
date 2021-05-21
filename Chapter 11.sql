@@ -16,6 +16,7 @@ SELECT * FROM hr.departments;
 --Creating User
 CREATE USER demo IDENTIFIED BY demo;
 ALTER USER demo IDENTIFIED BY employ; --changing user password
+DROP USER demo CASCADE; --drop a user whose schema contains objects
 
 --Granting System Privileges (DDL)
 GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW TO demo; --session privilege allow user to connect to database
@@ -28,11 +29,6 @@ GRANT DROP ANY INDEX TO demo;
 GRANT CREATE ANY DIRECTORY TO demo;
 GRANT SELECT, INSERT, UPDATE, DELETE ON tableName TO demo;
 GRANT CONNECT, RESOURCE TO demo; --https://chartio.com/resources/tutorials/how-to-create-a-user-and-grant-permissions-in-oracle/
-
-ALTER USER demo DEFAULT TABLESPACE USERS; --changes default tablespace of the user
-ALTER USER demo QUOTA UNLIMITED ON system;
-ALTER USER demo QUOTA 4M ON USERS; --set 4MB of space to user
-DROP USER demo CASCADE; --drop a user whose schema contains objects
 
 SELECT username, account_status FROM dba_users; --check database status
 SELECT username, account_status FROM dba_users WHERE username = 'DEMO';
@@ -68,3 +64,7 @@ SELECT * FROM USER_TAB_PRIVS_MADE; --Object privileges granted on the user’s o
 SELECT * FROM USER_TAB_PRIVS_RECD; --Object privileges granted to the user
 SELECT * FROM USER_COL_PRIVS_MADE; --Object privileges granted on the columns of the user’s objects
 SELECT * FROM USER_COL_PRIVS_RECD; --Object privileges granted to the user on specific columns
+
+ALTER USER demo DEFAULT TABLESPACE USERS; --changes default tablespace of the user
+ALTER USER demo QUOTA UNLIMITED ON system;
+ALTER USER demo QUOTA 4M ON USERS; --set 4MB of space to user

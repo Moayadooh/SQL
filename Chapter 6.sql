@@ -21,3 +21,11 @@ SELECT e.employee_id, e.last_name, e.department_id, d.department_name FROM emplo
 SELECT e.employee_id, e.last_name, e.department_id, d.department_name FROM employees e JOIN departments d ON e.department_id = d.department_id;
 
 SELECT e.employee_id, e.last_name, e.manager_id, m.last_name FROM employees e, employees m WHERE e.manager_id = m.employee_id;
+
+SELECT last_name, department_name
+FROM
+employees
+CROSS JOIN departments ;
+
+select * from employees;
+select * from departments;

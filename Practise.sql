@@ -19,4 +19,3 @@ select e.employee_id, e.last_name, e.manager_id, m.last_name from employees e jo
 
 --Exclude
 select employee_id, last_name from employees where employee_id in (select manager_id from employees) and employee_id <> 100;
-

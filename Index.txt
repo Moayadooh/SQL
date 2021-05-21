@@ -42,22 +42,38 @@ Reporting Aggregated Data Using the Group Functions
 Chapter 6
 Displaying Data from Multiple Tables
 -natural join
--using
+-using, on
 -left outer join, right outer join, full outer join
--alies, on
+-alies
 -self join
 
 
 Chapter 7
-Using Subqueries to Solve Queries
+Subqueries
+- Subquery
 - =, >, in
 - <>  Exclude
 - UNDEFINE
+- ALL
+- ANY
 
 
 Chapter 8 and 9
 DDL and DML
+-Creating Tables
+-Referencing Another User’s Tables
+-DEFAULT Option
 -Data Types & Datetime Data Types (Pages 132 to 134)
+-Constraints (NOT NULL, PRIMARY KEY, FOREIGN KEY, CHECK)
+-Creating a Table Using a Subquery
+-Referencing Another User’s Tables
+-INSERT
+-UPDATE
+-DELETE
+-TRUNCATE
+-Copying Rows from Another Table
+-Updating & Deleting Rows using Subquery
+-SAVEPOINT, ROLLBACK, COMMIT
 
 
 Chapter 10
@@ -72,7 +88,7 @@ Creating Other Schema Objects
 
 Chapter 11
 Controlling User Access
--Creating User & Changing User Password
+-Creating User & Changing User Password & Drop User
 -Granting System Privileges (DDL)
 -Creating and Granting Privileges to a Role
 -Granting Object Privileges (DML)
@@ -83,7 +99,6 @@ Controlling User Access
 
 Chapter 12
 Managing Schema Objects
--Insert data from other table
 -ALTER TABLE (ADD CONSTRAINT, MODIFY, DROP CONSTRAINT, 
 			  READ ONLY, READ WRITE, ON DELETE CASCADE, 	
 			  DROP PRIMARY KEY CASCADE, DISABLE CONSTRAINT, 

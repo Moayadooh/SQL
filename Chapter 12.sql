@@ -30,8 +30,6 @@ ALTER TABLE customers ADD CONSTRAINT customers_customer_id_pk primary key(custom
 ALTER TABLE customers MODIFY price CHECK(price >= 0);
 ALTER TABLE customers DROP CONSTRAINT customers_email_uk;
 
-INSERT INTO customers SELECT employee_id, last_name, email, NULL, NULL FROM hr.employees; --insert data from other table
-
 SELECT * FROM customers;
 SELECT * FROM address;
 

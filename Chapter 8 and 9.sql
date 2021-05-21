@@ -34,16 +34,6 @@ CONSTRAINT customers_price_min CHECK(price >= 0)
 DROP TABLE customers;
 SELECT * FROM customers;
 
-INSERT INTO customers VALUES(1,'Eyad','eyad@email',1,836.156);
-INSERT INTO customers VALUES(2,'Mohanned','mohanned@email',21,10.141);
-UPDATE customers SET price = 65.238 WHERE customer_id = 1;
-
-DELETE FROM customers WHERE customer_id = 1;
-TRUNCATE TABLE customers;--delete the rows permenantly 'No Rollback'
-
---Referencing Another User’s Tables
-SELECT * FROM hr.employees;
-
 --DEFAULT Option 
 CREATE TABLE address (
 name VARCHAR2(50) NOT NULL, 
@@ -56,15 +46,46 @@ CONSTRAINT address_customer_id_fk FOREIGN KEY(customer_id) REFERENCES customers(
 DROP TABLE address;
 SELECT * FROM address;
 
+--Creating a Table Using a Subquery
+CREATE TABLE dept80 AS SELECT employee_id, last_name, salary*12 ANNUAL, hire_date FROM hr.employees WHERE department_id = 80;
+SELECT * FROM dept80;
 
+--Inserting New Rows
+INSERT INTO customers VALUES(1,'Eyad','eyad@email',1,836.156);
+
+--Creating a Script
+INSERT INTO customers(customer_id,name,email,age,price) VALUES(&customer_id,'&name','&email',&age,&price);
+
+--Copying Rows from Another Table
+INSERT INTO customers SELECT employee_id, last_name, email, NULL, NULL FROM hr.employees;
+
+--Updating Rows in a Table
+UPDATE customers SET price = 65.238 WHERE customer_id = 1;
+
+--Updating Column with Subquery
+UPDATE customers SET price = (SELECT price FROM customers WHERE customer_id = 1) WHERE customer_id = 4;
+
+--Updating Rows Based on Another Table
+UPDATE customers SET price = (SELECT price FROM customers WHERE customer_id = 1) WHERE customer_id = (SELECT customer_id FROM customers WHERE name = 'salim');
+
+--DELETE Statement
+DELETE FROM customers WHERE customer_id = 1;
+
+--TRUNCATE Statement
+TRUNCATE TABLE customers;--delete the rows permenantly 'No Rollback'
+
+--Referencing Another User’s Tables
+SELECT * FROM hr.employees;
+
+--Rolling Back Changes to a Marker
 SAVEPOINT frstPoint;
 ROLLBACK TO frstPoint; --all save points after this savepoint will be erased
+
 ROLLBACK; --rollback to last commit (all savepoints after commit will be erased)
-COMMIT;
+COMMIT; --Committing Data
 
 SET VERIFY OFF
 SET VERIFY ON
---SET VERIFY
 --https://www.oreilly.com/library/view/oracle-sqlplus-the/0596007469/re106.html
 
 SET ECHO OFF
