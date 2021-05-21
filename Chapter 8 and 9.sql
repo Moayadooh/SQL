@@ -1,5 +1,3 @@
---Chapter 8 and 9
---DDL and DML
 
 /*
 -VARCHAR store up to 2000 bytes of characters 
@@ -83,13 +81,3 @@ ROLLBACK TO frstPoint; --all save points after this savepoint will be erased
 
 ROLLBACK; --rollback to last commit (all savepoints after commit will be erased)
 COMMIT; --Committing Data
-
-SET VERIFY OFF
-SET VERIFY ON
---https://www.oreilly.com/library/view/oracle-sqlplus-the/0596007469/re106.html
-
-SET ECHO OFF
-SET ECHO ON
-
---Execute script using Path
-@/home/moayad/Documents/SQL/SQL_Script/sql

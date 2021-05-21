@@ -1,49 +1,53 @@
 Chapter 1
 Retrieving Data Using the SQL SELECT Statement
--table structure
--unique data in column
--concatination
--change column name
+-table structure (DESCRIBE)
+-unique data in column (DISTINCT)
+-concatination (|| ' ' ||)
+-show different column name
 
 
 Chapter 2
 Restricting and Sorting Data
 -operators (>, <, +, -, *, /, =)
--and, between, not, in, null
--order by (acending, decending)
--like (%, ___)
--'&name'
+-AND, BETWEEN, NOT, IN, NULL
+-ORDER BY (ASC, DESC)
+-LIKE (%, ___)
+-'&val'
+- DEFINE, UNDEFINE
+- VERIFY
 
 
 Chapter 3
 Using Single-Row Functions to Customize Output
--lower, upper, initcap, round, length, count, sum, avg, max, min
+-functions (LOWER, UPPER, INITCAP, LENGTH)
+-MONTHS_BETWEEN, ROUND, TRUNC, MOD
 -sysdate from dual
--months_between, trunc
--lpad (right-padded), rpad (left-padded)
+-LPAD (right-padded), RPAD (left-padded)
 
 
 Chapter 4
 Using Conversion Functions and Conditional Expressions
--date fromat function
+-date fromat function (page 202)
 -salary format function
--concat, substr
--nvl(Replace null with value), nvl2(if not null replace with first else replace with second)
--nullif(if both are equal return null else return first value. "sort based on the second value")
--coalesce(if both are null return the value else if first not null then return first else return second)
--case expression (case, when, then, else, end)
+-CONCAT, SUBSTR
+-NVL(Replace null with value), NVL2(if not null replace with first else replace with second)
+-NULLIF(if both are equal return null else return first value. "sort based on the second value")
+-COALESCE(if both are null return the value else if first not null then return first else return second)
+-CASE expression
 
 
 Chapter 5
 Reporting Aggregated Data Using the Group Functions
--group by expression
+-functions (AVG, SUM, MIN, MAX, COUNT)
+-GROUP BY clause
+-HAVING clause
 
 
 Chapter 6
 Displaying Data from Multiple Tables
 -natural join
 -using, on
--left outer join, right outer join, full outer join
+-left outer join, right outer join, full outer join, cross join
 -alies
 -self join
 
@@ -53,7 +57,6 @@ Subqueries
 - Subquery
 - =, >, in
 - <>  Exclude
-- UNDEFINE
 - ALL
 - ANY
 

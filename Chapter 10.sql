@@ -1,13 +1,3 @@
---Chapter 10
---Creating Other Schema Objects
-/*
--Views
--Sequences
--Triggers
--Stored Procedures
--Indexes
--Synonyms
-*/
 
 --Views
 CREATE view emp_vw AS SELECT id, first_name, last_name, mobileno, salary FROM employees WHERE id IN (1,2,3);

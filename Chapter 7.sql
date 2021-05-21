@@ -1,12 +1,4 @@
---Chapter 7
---Subqueries
-/*
-- =, >, in
-- <>  Exclude
-- UNDEFINE
-- ALL
-- ANY
-*/
+
 SELECT * FROM employees WHERE manager_id = (SELECT manager_id FROM employees WHERE employee_id = 101);
 
 SELECT * FROM employees WHERE salary > (SELECT avg(salary) FROM employees);
