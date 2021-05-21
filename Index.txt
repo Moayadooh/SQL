@@ -2,7 +2,7 @@ Chapter 1
 Retrieving Data Using the SQL SELECT Statement
 -table structure (DESCRIBE)
 -unique data in column (DISTINCT)
--concatination (|| ' ' ||)
+-concatenation (|| ' ' ||)
 -show different column name
 
 
@@ -69,7 +69,6 @@ DDL and DML
 -Data Types & Datetime Data Types (Pages 132 to 134)
 -Constraints (NOT NULL, PRIMARY KEY, FOREIGN KEY, CHECK)
 -Creating a Table Using a Subquery
--Referencing Another User’s Tables
 -INSERT
 -UPDATE
 -DELETE
